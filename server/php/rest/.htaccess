@@ -1,0 +1,22 @@
+<IfModule mod_rewrite.c>
+	# Options +FollowSymLinks -MultiViews
+	# RewriteEngine On
+
+	# Object Detail API: /<resource>/<id>
+	# RewriteRule ^([^/]+)/([^/]+)/?$ index.php?url=$1&id=$2 [L,QSA]
+
+	# Object List API: /<resource>
+	# RewriteRule ^([^/]+)/?$ index.php?url=$1 [L,QSA]
+
+	RewriteEngine On
+
+	RewriteCond %{REQUEST_FILENAME} !-d
+	RewriteCond %{REQUEST_FILENAME} !-s
+	RewriteRule ^(.*)$ index.php?url=$1 [QSA,NC,L]
+
+	RewriteCond %{REQUEST_FILENAME} -d
+	RewriteRule ^(.*)$ index.php [QSA,NC,L]
+
+	RewriteCond %{REQUEST_FILENAME} -s
+	RewriteRule ^(.*)$ index.php [QSA,NC,L]	
+</IfModule>
